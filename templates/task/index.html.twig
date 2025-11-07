@@ -2,7 +2,20 @@
 
 {% block title %}Liste des tâches
 {% endblock %}
-
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css"/>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+$('.table-auto').DataTable();
+});
+	</script>
+{% endblock %}
 {% block body %}
 	<h1>Liste des tâches</h1>
 	<table class="table-auto">
@@ -26,12 +39,11 @@
 						<td colspan="3">Aucune tâche trouvée.</td>
 					</tr>
 				{% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="3">Aucune tâche trouvée.</td>
-                </tr>
-            {% endif %}
-			</tbody>
+			{% else %}
+				<tr>
+					<td colspan="3">Aucune tâche trouvée.</td>
+				</tr>
+			{% endif %}
 		</tbody>
-	</table>
-{% endblock %}
+	</tbody>
+</table>{% endblock %}
