@@ -18,6 +18,8 @@ $('.table-auto').DataTable();
 {% endblock %}
 {% block body %}
 	<h1>Liste des tâches</h1>
+    <a href="{{ path('app_task_create') }}" class="btn btn-primary mb-3">Créer une nouvelle tâche</a>
+
 	<table class="table-auto">
 		<thead>
 			<tr>
@@ -25,6 +27,8 @@ $('.table-auto').DataTable();
 				<th scope="col">Titre</th>
 				<th scope="col">Date d'échéance</th>
                 <th scope="col">Catégorie</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,6 +39,12 @@ $('.table-auto').DataTable();
 						<td>{{task.name}}</td>
 						<td>{{task.dueAt ? task.dueAt|date('d/m/Y') : 'Pas de date'}}</td>
                         <td>{{task.tag ? task.tag.name : 'Pas de tag'}}</td>
+                        <td>
+                            <a href="{{ path('app_task_update', {'id': task.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app_task_delete', {'id': task.id}) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');">Supprimer</a>
+                        </td>
 					</tr>
 				{% else %}
 					<tr>
