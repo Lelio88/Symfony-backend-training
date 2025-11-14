@@ -14,12 +14,13 @@ class AppFixtures extends Fixture
     {
         // Création d'un nouvel objet Faker
         $faker = Factory::create('fr_FR');
+        $fakerEN = Factory::create('en_US');
         //Création de nos 5 catégories
         for ($c = 0; $c < 5; $c++) {
             //Création d'un nouvel objet Tag
             $tag = new Tag();
             //On nourrit l'objet Tag
-            $tag->setName($faker->colorName());
+            $tag->setName($fakerEN->safeColorName());
             //On fait persister les données
             $manager->persist($tag);
         }

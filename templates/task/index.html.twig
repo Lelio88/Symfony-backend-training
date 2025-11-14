@@ -24,15 +24,17 @@ $('.table-auto').DataTable();
 				<th scope="col">ID</th>
 				<th scope="col">Titre</th>
 				<th scope="col">Date d'échéance</th>
+                <th scope="col">Catégorie</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% if tasks is defined %}
 				{% for task in tasks %}
-					<tr>
+					<tr style="background-color: {{ task.tag.name }}">
 						<th>{{task.id}}</th>
-						<th>{{task.name}}</th>
-						<th>{{task.dueAt ? task.dueAt|date('d/m/Y') : 'Pas de date'}}</th>
+						<td>{{task.name}}</td>
+						<td>{{task.dueAt ? task.dueAt|date('d/m/Y') : 'Pas de date'}}</td>
+                        <td>{{task.tag ? task.tag.name : 'Pas de tag'}}</td>
 					</tr>
 				{% else %}
 					<tr>

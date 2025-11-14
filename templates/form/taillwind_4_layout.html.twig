@@ -1,0 +1,48 @@
+{# templates/form/tailwind_4_layout.html.twig #}
+
+{% use "form_div_layout.html.twig" %}
+
+{# Champ générique #}
+{% block form_row %}
+    <div class="mb-5">
+        {{ form_label(form, null, { label_attr: { class: 'block text-sm font-medium text-gray-900 mb-1' } }) }}
+        {{ form_widget(form, { attr: { class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 text-gray-900' } }) }}
+        {% if form.vars.help is defined and form.vars.help %}
+            <p class="mt-1 text-sm text-gray-500">{{ form_help(form) }}</p>
+        {% endif %}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}
+
+{# Label #}
+{% block form_label %}
+    {% if label is not same as(false) %}
+        {% set label_attr = label_attr|merge({ class: (label_attr.class|default('') ~ ' block text-sm font-medium text-gray-900')|trim }) %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# Widget (input, select, textarea) #}
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% set classes = 'block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 text-gray-900' %}
+    {% set attr = attr|merge({ class: (attr.class|default('') ~ ' ' ~ classes)|trim }) %}
+    {{ parent() }}
+{% endblock %}
+
+{# Zone d'erreurs #}
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <ul class="mt-1 text-sm text-red-600">
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{# Bouton #}
+{% block button_widget %}
+    {% set attr = attr|merge({ class: (attr.class|default('') ~ ' inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500')|trim }) %}
+    {{ parent() }}
+{% endblock %}
