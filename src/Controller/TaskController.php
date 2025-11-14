@@ -26,6 +26,9 @@ final class TaskController extends AbstractController
     #[Route('/task', name: 'app_task')]
     public function index(): Response
     {
+        //Réccupération de l'utilisateur connecté
+        $user = $this->getUser();
+
         //Dans le repository de Task, je réccupère toutes les données
         $tasks = $this->repository->findAll();
         //Affichage des données dans le var_dumper
